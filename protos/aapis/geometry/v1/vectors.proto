@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package aapis.geometry.v1;
+
+message Vector1 {
+    double x = 1;
+}
+
+message Vector2 {
+    double x = 1;
+    double y = 2;
+}
+
+message Vector3 {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+}

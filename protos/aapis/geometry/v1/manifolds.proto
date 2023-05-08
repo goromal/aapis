@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package aapis.geometry.v1;
+
+import "aapis/geometry/v1/vectors.proto";
+
+message SO2 {
+    // Real part
+    double w = 1;
+    // Imaginary part
+    double x = 2;
+}
+
+message SO3 {
+    // Real/scalar part
+    double w = 1;
+    // Imaginary/vector part
+    double x = 2;
+    double y = 3;
+    double z = 4;
+}
+
+message SE2 {
+    // Translation
+    aapis.geometry.v1.Vector2 t = 1;
+    // Rotation
+    SO2 q = 2;
+}
+
+message SE3 {
+    // Translation
+    aapis.geometry.v1.Vector3 t = 1;
+    // Rotation
+    SO3 q = 2;
+}
