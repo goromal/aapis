@@ -6,7 +6,7 @@ message Mp4Job {
     // Input file to convert
     oneof input {
         string input_path = 1;
-        int64 job_id_output = 2;
+        int64 job_id_input = 2;
     }
     // Mp4 file to output
     string output_path = 3;
@@ -14,10 +14,8 @@ message Mp4Job {
 
 message Mp4UniteJob {
     // Mp4 files to unite (in order)
-    oneof inputs {
-        repeated string input_paths = 1;
-        repeated int64 job_id_outputs = 2;
-    }
+    repeated string input_paths = 1;
+    repeated int64 job_id_inputs = 2;
     // Mp4 file to output
     string output_path = 3;
 }
