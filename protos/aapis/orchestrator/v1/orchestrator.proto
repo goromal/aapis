@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package aapis.orchestrator.v1;
+
+message KickoffJobRequest {}
+
+message KickoffJobResponse {}
+
+
