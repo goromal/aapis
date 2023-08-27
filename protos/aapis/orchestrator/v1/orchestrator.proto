@@ -89,21 +89,21 @@ message JobsSummaryStatusResponse {
     // List of job ids that are queued
     repeated int64 queued_jobs = 4;
     // Number of jobs currently active
-    int64 num_active_jobs = 3;
+    int64 num_active_jobs = 5;
     // List of job ids that are active
-    repeated int64 active_jobs = 4;
+    repeated int64 active_jobs = 6;
     // Number of jobs currently blocked
-    int64 num_blocked_jobs = 3;
+    int64 num_blocked_jobs = 7;
     // List of job ids that are blocked
-    repeated int64 blocked_jobs = 4;
+    repeated int64 blocked_jobs = 8;
     // Number of jobs currently paused
-    int64 num_paused_jobs = 3;
+    int64 num_paused_jobs = 9;
     // List of job ids that are paused
-    repeated int64 paused_jobs = 4;
+    repeated int64 paused_jobs = 10;
     // Number of jobs discarded
-    int64 num_discarded_jobs = 3;
+    int64 num_discarded_jobs = 11;
     // List of job ids that are discarded
-    repeated int64 discarded_jobs = 4;
+    repeated int64 discarded_jobs = 12;
 }
 
 message PauseJobsRequest {}
