@@ -6,4 +6,6 @@ message KickoffJobRequest {}
 
 message KickoffJobResponse {}
 
-
+service OrchestratorService {
+    //
+}
