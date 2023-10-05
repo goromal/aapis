@@ -27,6 +27,8 @@ message ScrapeJob {
     string xpath = 2;
     // Path to scrape the files into
     string output_path = 3;
+    // File extension to narrow down the scraping
+    string file_extension = 4;
 }
 
 message KickoffJobRequest {
