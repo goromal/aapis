@@ -74,6 +74,8 @@ message JobStatusResponse {
     JobStatus status = 1;
     // Status message
     string message = 2;
+    // Child processes spawned from the Job's output
+    repeated int64 spawned_children = 3;
 }
 
 message JobsSummaryStatusRequest {}
