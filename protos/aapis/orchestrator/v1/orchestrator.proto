@@ -31,6 +31,21 @@ message ScrapeJob {
     string file_extension = 4;
 }
 
+message ListJob {
+    // Directory to list the files of
+    string path = 1;
+    // File extension to narrow down the listing (leave empty to accept all)
+    string file_extension = 2;
+}
+
+message RemoveJob {
+    // File to remove
+    oneof input {
+        string input_path = 1;
+        int64 job_id_input = 2;
+    }
+}
+
 message KickoffJobRequest {
     // Priority level of the job (0 = highest)
     int64 priority = 1;
@@ -42,6 +57,8 @@ message KickoffJobRequest {
         Mp4Job mp4 = 3;
         Mp4UniteJob mp4_unite = 4;
         ScrapeJob scrape = 5;
+        ListJob list = 6;
+        RemoveJob remove = 7;
     }
 }
 
