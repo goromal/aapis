@@ -91,10 +91,18 @@ message JobStatusRequest {
 message JobStatusResponse {
     // Status of the requested job
     JobStatus status = 1;
-    // Status message
-    string message = 2;
+    // Execution command
+    string exec = 2;
+    // Priority level
+    int64 priority = 3;
+    // Current blocking jobs, if any
+    repeated int64 blockers = 4;
+    // Output paths from the job, if completed
+    repeated string outputs = 5;
     // Child processes spawned from the Job's output
-    repeated int64 spawned_children = 3;
+    repeated int64 spawned_children = 6;
+    // Status message
+    string message = 7;
 }
 
 message JobsSummaryStatusRequest {}
