@@ -10,6 +10,8 @@ message Mp4Job {
     }
     // Mp4 file to output
     string output_path = 3;
+    // Whether to remove audio [default = false]
+    bool mute = 4;
 }
 
 message Mp4UniteJob {
