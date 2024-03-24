@@ -72,7 +72,7 @@ message KickoffJobRequest {
         ListJob list = 6;
         RemoveJob remove = 7;
         BashJob bash = 8;
-        SyncJob sync_job = 9;
+        SyncJob sync = 9;
     }
 }
 
