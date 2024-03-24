@@ -53,6 +53,11 @@ message BashJob {
     string bash_command = 1;
 }
 
+message SyncJob {
+    // Cloud dir title to sync
+    string cloud_dir = 1;
+}
+
 message KickoffJobRequest {
     // Priority level of the job (0 = highest)
     int64 priority = 1;
@@ -67,6 +72,7 @@ message KickoffJobRequest {
         ListJob list = 6;
         RemoveJob remove = 7;
         BashJob bash = 8;
+        SyncJob sync_job = 9;
     }
 }
 
