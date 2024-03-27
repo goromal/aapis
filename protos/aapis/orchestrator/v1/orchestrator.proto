@@ -117,6 +117,8 @@ message JobStatusResponse {
     repeated int64 spawned_children = 6;
     // Status message
     string message = 7;
+    // Program output, if completed
+    string program_output = 8;
 }
 
 message JobsSummaryStatusRequest {}
