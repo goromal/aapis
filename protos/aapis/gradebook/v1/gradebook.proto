@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package aapis.gradebook.v1;
+
+import "google/protobuf/timestamp.proto";
+
+enum RequirementStatus {
+    REQUIREMENT_STATUS_INVALID = 0;
+    REQUIREMENT_STATUS_ACTIVE = 1;
+    REQUIREMENT_STATUS_OBSOLETE = 2;
+}
+
+message Requirement {
+    // Universally unique ID
+    string req_uuid = 1;
+    // Requirement tag
+    string tag = 2;
+    // Parent requirement tag; leave empty if none
+    string parent_tag = 3;
+    // Current requirement status
+    RequirementStatus status = 4;
+    // Requirement text
+    string text = 5;
+}
+
+message TestResult {
+    // Requirement ID to which this test result corresponds
+    string req_uuid = 1;
+    // Software unit under test
+    string test_unit = 2;
+    // Unique hash of the software version under test
+    string software_hash = 3;
+    // Date of test completion
+    google.protobuf.Timestamp test_date = 4;
+    // Test result: passed or failed
+    bool passed = 5;
+}
