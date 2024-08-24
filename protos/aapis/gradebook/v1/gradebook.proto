@@ -35,3 +35,28 @@ message TestResult {
     // Test result: passed or failed
     bool passed = 5;
 }
+
+message CreateRequirementRequest {
+    // Requirement to create
+    Requirement requirement = 1;
+}
+
+message CreateRequirementResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message SubmitTestResultRequest {
+    // Test result to submit
+    TestResult result = 1;
+}
+
+message SubmitTestResultResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+service GradebookService {
+    rpc CreateRequirement (CreateRequirementRequest) returns (CreateRequirementResponse) {}
+    rpc SubmitTestResult (SubmitTestResultRequest) returns (SubmitTestResultResponse) {}
+}
