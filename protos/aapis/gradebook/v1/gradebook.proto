@@ -5,9 +5,10 @@ package aapis.gradebook.v1;
 import "google/protobuf/timestamp.proto";
 
 enum RequirementStatus {
-    REQUIREMENT_STATUS_INVALID = 0;
-    REQUIREMENT_STATUS_ACTIVE = 1;
-    REQUIREMENT_STATUS_OBSOLETE = 2;
+    REQUIREMENT_STATUS_UNSPECIFIED = 0;
+    REQUIREMENT_STATUS_INVALID = 1;
+    REQUIREMENT_STATUS_ACTIVE = 2;
+    REQUIREMENT_STATUS_OBSOLETE = 3;
 }
 
 message Requirement {
