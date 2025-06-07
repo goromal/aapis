@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package aapis.tactical.v1;
+
+message Vocabulary {
+    string word = 1;
+    string definition = 2;
+}
+
+message JournalEntry {
+    string date = 1;
+    string entry = 2;
+}
+
+message TaskList {
+    repeated string tasks = 1;
+}
+
+message Quote {
+    string author = 1;
+    string quote = 2;
+}
+
+message WikiUrl {
+    string url = 1;
+}
+
+message ComponentUpdate {
+    oneof component {
+        Vocabulary vocab = 1;
+        JournalEntry journal = 2;
+        TaskList today_tasks = 3;
+        TaskList tomorrow_tasks = 4;
+        Quote quote = 5;
+        WikiUrl wiki_url = 6;
+    }
+}
+
+message DailyRefreshRequest {}
+
+message DailyRefreshResponse {
+    bool success = 1;
+}
+
+message UpdateComponentRequest {
+    ComponentUpdate component_update = 1;
+}
+
+message UpdateComponentResponse {
+    bool success = 1;
+}
+
+service TacticalService {
+    rpc DailyRefresh (DailyRefreshRequest) returns (DailyRefreshResponse) {}
+    rpc UpdateComponent (UpdateComponentRequest) returns (UpdateComponentResponse) {}
+}
