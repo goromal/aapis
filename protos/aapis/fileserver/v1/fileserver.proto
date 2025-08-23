@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package aapis.fileserver.v1;
+
+message SetRootDirRequest {
+    string directory = 1;
+}
+
+message SetRootDirResponse {
+    bool success = 1;
+}
+
+service FileserverService {
+    rpc SetRootDir (SetRootDirRequest) returns (SetRootDirResponse) {}
+}
