@@ -22,4 +22,4 @@ jobs:
     - run: git config --global url."https://github.com/".insteadOf ssh://git@github.com/
     - run: nix-shell -p buf --run "cd protos && buf lint"
     - run: export NIXPKGS_ALLOW_UNFREE=1 && nix-build -E 'with (import (fetchTarball "https://github.com/goromal/anixpkgs/archive/refs/heads/master.tar.gz") {}); aapis-cpp.override { pkg-src = lib.cleanSource ./.; }'
-    - run: export NIXPKGS_ALLOW_UNFREE=1 && nix-build -E 'with (import (fetchTarball "https://github.com/goromal/anixpkgs/archive/refs/heads/master.tar.gz") {}); python39.pkgs.aapis-py.override { pkg-src = lib.cleanSource ./.; }'
+    - run: export NIXPKGS_ALLOW_UNFREE=1 && nix-build -E 'with (import (fetchTarball "https://github.com/goromal/anixpkgs/archive/refs/heads/master.tar.gz") {}); aapis-py.override { pkg-src = lib.cleanSource ./.; }'
