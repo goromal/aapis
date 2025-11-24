@@ -11,15 +11,15 @@ jobs:
     name: "Lint and Build"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v20
+    - uses: actions/checkout@v5
+    - uses: cachix/install-nix-action@v31
       with:
-        nix_path: nixpkgs=channel:nixos-22.05
-    - uses: cachix/cachix-action@v12
+        nix_path: nixpkgs=channel:nixos-25.05
+    - uses: cachix/cachix-action@v14
       with:
         name: github-public
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: git config --global url."https://github.com/".insteadOf ssh://git@github.com/
     - run: nix-shell -p buf --run "cd protos && buf lint"
     - run: export NIXPKGS_ALLOW_UNFREE=1 && nix-build -E 'with (import (fetchTarball "https://github.com/goromal/anixpkgs/archive/refs/heads/master.tar.gz") {}); aapis-cpp.override { pkg-src = lib.cleanSource ./.; }'
-    - run: export NIXPKGS_ALLOW_UNFREE=1 && nix-build -E 'with (import (fetchTarball "https://github.com/goromal/anixpkgs/archive/refs/heads/master.tar.gz") {}); python39.pkgs.aapis-py.override { pkg-src = lib.cleanSource ./.; }'
+    - run: export NIXPKGS_ALLOW_UNFREE=1 && nix-build -E 'with (import (fetchTarball "https://github.com/goromal/anixpkgs/archive/refs/heads/master.tar.gz") {}); aapis-py.override { pkg-src = lib.cleanSource ./.; }'
