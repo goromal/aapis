@@ -58,6 +58,16 @@ message SyncJob {
     string cloud_dir = 1;
 }
 
+message PngJob {
+    // Input file to convert
+    oneof input {
+        string input_path = 1;
+        int64 job_id_input = 2;
+    }
+    // Png file to output
+    string output_path = 3;
+}
+
 message KickoffJobRequest {
     // Priority level of the job (0 = highest)
     int64 priority = 1;
@@ -73,6 +83,7 @@ message KickoffJobRequest {
         RemoveJob remove = 7;
         BashJob bash = 8;
         SyncJob sync = 9;
+        PngJob png = 10;
     }
 }
 
