@@ -65,6 +65,7 @@ message PngJob {
         int64 job_id_input = 2;
     }
     // Png file to output
+    string output_path = 3;
 }
 
 message KickoffJobRequest {
