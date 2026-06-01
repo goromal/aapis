@@ -129,6 +129,71 @@ message CancelJobResponse {
     string message = 2;
 }
 
+message ListJobDefinitionsRequest {}
+
+message JobDefinitionInfo {
+    string job_type = 1;
+    string job_definition = 2;
+    int64 timeout_seconds = 3;
+    int64 created_at = 4;  // Unix timestamp in seconds
+    int64 updated_at = 5;  // Unix timestamp in seconds
+}
+
+message ListJobDefinitionsResponse {
+    repeated JobDefinitionInfo definitions = 1;
+}
+
+message DeleteJobDefinitionRequest {
+    string job_type = 1;
+}
+
+message DeleteJobDefinitionResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message QueryJobsRequest {
+    // Filter by job type (empty = all types)
+    string job_type_filter = 1;
+
+    // Filter by status
+    enum StatusFilter {
+        ALL = 0;
+        COMPLETE = 1;
+        INCOMPLETE = 2;  // QUEUED, ACTIVE, BLOCKED, PAUSED
+        ERROR = 3;
+        CANCELED = 4;
+    }
+    StatusFilter status_filter = 2;
+
+    // Sort order
+    enum SortBy {
+        JOB_ID = 0;          // Chronological by creation
+        COMPLETION_TIME = 1;  // Completed jobs first, sorted by completion time
+        PRIORITY = 2;         // By priority level
+    }
+    SortBy sort_by = 3;
+
+    // Pagination
+    int32 limit = 4;   // 0 = no limit
+    int32 offset = 5;  // Skip first N results
+}
+
+message JobInfo {
+    int64 job_id = 1;
+    string job_type = 2;
+    JobStatus status = 3;
+    int64 priority = 4;
+    int64 submitted_at = 5;     // Unix timestamp
+    int64 completed_at = 6;     // Unix timestamp (0 if not complete)
+    double exec_duration_secs = 7;
+}
+
+message QueryJobsResponse {
+    repeated JobInfo jobs = 1;
+    int32 total_count = 2;  // Total matching jobs (before pagination)
+}
+
 service OrchestratorService {
     rpc DefineJob (DefineJobRequest) returns (DefineJobResponse) {}
     rpc KickoffJob (KickoffJobRequest) returns (KickoffJobResponse) {}
@@ -137,4 +202,7 @@ service OrchestratorService {
     rpc PauseJobs (PauseJobsRequest) returns (PauseJobsResponse) {}
     rpc ResumeJobs (ResumeJobsRequest) returns (ResumeJobsResponse) {}
     rpc CancelJob (CancelJobRequest) returns (CancelJobResponse) {}
+    rpc ListJobDefinitions (ListJobDefinitionsRequest) returns (ListJobDefinitionsResponse) {}
+    rpc DeleteJobDefinition (DeleteJobDefinitionRequest) returns (DeleteJobDefinitionResponse) {}
+    rpc QueryJobs (QueryJobsRequest) returns (QueryJobsResponse) {}
 }
