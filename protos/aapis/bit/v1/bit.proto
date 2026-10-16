@@ -1,0 +1,44 @@
+syntax = "proto3";
+package aapis.bit.v1;
+
+// Local machine BIT control. Bind to loopback; use SSH forwarding remotely.
+service BitService {
+  rpc List(ListRequest) returns (ListResponse);
+  // Empty names runs all regression checks. Named checks may include health.
+  // Reject the entire request if a name is unknown, repeated, or already running.
+  rpc Run(RunRequest) returns (RunResponse);
+}
+message ListRequest {}
+enum Kind {
+  KIND_UNSPECIFIED = 0;
+  KIND_HEALTH = 1;
+  KIND_REGRESSION = 2;
+}
+enum State {
+  STATE_UNSPECIFIED = 0;
+  STATE_IDLE = 1;
+  STATE_RUNNING = 2;
+  STATE_PASSED = 3;
+  STATE_FAILED = 4;
+  STATE_TIMED_OUT = 5;
+}
+message Check {
+  string name = 1;
+  Kind kind = 2;
+  State state = 3;
+  uint64 run_id = 4;
+  string detail = 5;
+  int64 started_unix_ms = 6;
+  int64 finished_unix_ms = 7;
+  double rate_hz = 8;
+  uint64 timeout_ms = 9;
+}
+message ListResponse {
+  repeated Check checks = 1;
+}
+message RunRequest {
+  repeated string names = 1;
+}
+message RunResponse {
+  repeated Check checks = 1;
+}
