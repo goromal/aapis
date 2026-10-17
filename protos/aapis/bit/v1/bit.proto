@@ -32,6 +32,9 @@ message Check {
   int64 finished_unix_ms = 7;
   double rate_hz = 8;
   uint64 timeout_ms = 9;
+  // Plugin-provided suggestions for diagnosing or fixing a failure; empty if
+  // the plugin gave none.
+  string remediation = 10;
 }
 message ListResponse {
   repeated Check checks = 1;
