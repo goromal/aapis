@@ -16,7 +16,10 @@ enum Kind {
 }
 enum State {
   STATE_UNSPECIFIED = 0;
+  // No run has finished yet.
   STATE_IDLE = 1;
+  // Deprecated: Check.running reports an in-flight run; state keeps the last
+  // finished result.
   STATE_RUNNING = 2;
   STATE_PASSED = 3;
   STATE_FAILED = 4;
@@ -25,16 +28,26 @@ enum State {
 message Check {
   string name = 1;
   Kind kind = 2;
+  // Result of the last finished run; IDLE until the first run finishes.
   State state = 3;
+  // Incremented when a run starts.
   uint64 run_id = 4;
+  // Detail of the last finished run.
   string detail = 5;
+  // Start of the current run while running, else of the last finished run.
   int64 started_unix_ms = 6;
+  // End of the last finished run; 0 if none.
   int64 finished_unix_ms = 7;
   double rate_hz = 8;
   uint64 timeout_ms = 9;
   // Plugin-provided suggestions for diagnosing or fixing a failure; empty if
   // the plugin gave none.
   string remediation = 10;
+  // True while a run is queued or executing.
+  bool running = 11;
+  // What the in-flight run is doing (running, or queued behind another
+  // regression); empty when not running.
+  string progress = 12;
 }
 message ListResponse {
   repeated Check checks = 1;
